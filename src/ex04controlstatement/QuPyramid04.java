@@ -16,7 +16,7 @@ public class QuPyramid04 {
 				System.out.print("*");
 			}
 
-			System.out.println();     
+			System.out.println(); 
 		}
 
 	}
