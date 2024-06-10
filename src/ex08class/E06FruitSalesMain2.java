@@ -42,7 +42,27 @@ class FruitBuyer2{
 public class E06FruitSalesMain2 {
 
 	public static void main(String[] args) {
-		// TODO Auto-generated method stub
+		FruitSeller2 seller1 = new FruitSeller2();
+		seller1.initMembers(0, 100, 1000);
+		
+		FruitSeller2 seller2 = new FruitSeller2();
+		seller2.initMembers(0, 80, 500);
+		
+		FruitBuyer2 buyer = new FruitBuyer2();
+		buyer.initMembers(10000, 0);
+		
+		System.out.println("구매행위가 일어나기 전의 상태");
+		seller1.showSaleResult();
+		seller2.showSaleResult();
+		buyer.showBuyResult();
+		
+		buyer.buyApple(seller1, 5000);
+		buyer.buyApple(seller2, 5000);
+		
+		System.out.println("구매행위가 일어난 후의 상태");
+		seller1.showSaleResult();
+		seller2.showSaleResult();
+		buyer.showBuyResult();
 
 	}
 
