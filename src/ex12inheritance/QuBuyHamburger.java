@@ -51,7 +51,7 @@ class SetPrice extends HamburgerPrice {
 	}
 
 	public int cal() {
-		return (burger.getPrice() + COKE + POTATO)-500;
+		return super.cal()-500;
 	}
 
 	public void showBurgerInfo() {
@@ -73,7 +73,7 @@ public class QuBuyHamburger {
 
 		// 치즈버거를 기본가격으로 구매
 		HamburgerPrice price1 = new HamburgerPrice(burger1);
-		price1.showBurgerInfo(); // 4500원
+	//	price1.showBurgerInfo(); // 4500원
 
 		// 치킨버거를 세트가격으로 구매
 		HamburgerPrice price2 = new SetPrice(burger2);

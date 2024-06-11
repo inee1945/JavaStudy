@@ -2,7 +2,7 @@ package ex12inheritance;
 
 import java.util.Scanner;
 
-class Friend {
+abstract class Friend {
 	String name;
 	String phone;
 	String addr;
@@ -19,9 +19,7 @@ class Friend {
 		System.out.println("주소: " + addr);
 	}
 
-	public void showBasicInfo() {
-
-	}
+	public abstract void showBasicInfo();
 }
 
 class HighFriend extends Friend {
