@@ -36,6 +36,9 @@ public class E01WrapperClass2 {
 		}
 		System.out.println(cnt);
 		
+		Integer kkk = 101;
+		System.out.println(kkk);
+		
 	}
 	
 	
