@@ -1,4 +1,4 @@
-package ex16lambda;
+package ex18lambda;
 
 import javax.swing.plaf.multi.MultiSliderUI;
 

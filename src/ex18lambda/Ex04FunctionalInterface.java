@@ -1,4 +1,4 @@
-package ex16lambda;
+package ex18lambda;
 
 @FunctionalInterface
 interface ISchool4 {

@@ -1,4 +1,4 @@
-package ex16lambda;
+package ex18lambda;
 
 interface ISchool3 {
 	void studyLambda(String str);
