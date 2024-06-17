@@ -21,28 +21,29 @@ public class QuArrayList {
 		list.add(st2);
 		list.add(st3);
 		list.add(st4);
-		System.out.println(st4);
+		
+		System.out.println(list);
 		// 1.검색할 이름을 입력받음
+		
 		Scanner scanner = new Scanner(System.in);
 		System.out.println("삭제할 이름을 입력하세요");
 		String str = scanner.nextLine();
+		
 
 		// 2.확장for문으로 컬렉션 전체를 접근
-		int isRemove = 0;
+		int isRemove = -1;
 
 		for (Student std : list) {
 			if (std.getName().equals(str)) {
-				list.remove(std);
+			int idx =	list.indexOf(std);
+			System.out.println("indddddd"+idx);
 				isRemove = 1;
+				System.out.println("삭제에 성공했습니다."+list.remove(idx));
 				break;
 			}
 		}
 
-		System.out.println(isRemove == 1 ? "삭제에 성공했습니다." : "삭제할 대상이 없습니다.");
-
-		for (Student std : list) {
-			System.out.println(std);
-		}
+		if(isRemove==-1)System.out.println("검색결과가 없습니다."+list);
 	}
 
 }

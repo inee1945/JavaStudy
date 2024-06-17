@@ -96,7 +96,8 @@ public class EX07MyFriendInfoBook {
 				choice = scan.nextInt();
 			} catch (InputMismatchException e) {
 				System.out.println("숫자만 입력가능합니다.");
-				return;
+				scan.nextLine();
+				continue;
 			} 
 			
 			switch (choice) {
