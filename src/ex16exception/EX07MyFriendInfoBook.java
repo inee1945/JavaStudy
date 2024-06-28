@@ -1,9 +1,9 @@
-package ex17collection;
+package ex16exception;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.InputMismatchException;
 import java.util.Scanner;
+
+import org.w3c.dom.TypeInfo;
 
 abstract class Friend {
 	String name;
@@ -72,7 +72,7 @@ class UnivFriend extends Friend {
 	}
 }
 
-public class Ex07MyFriendInfoBook {
+public class EX07MyFriendInfoBook {
 	public static void menuShow() {
 		System.out.println("######메뉴를 입력하세요#######");
 		System.out.println("1.고딩친구입력");
@@ -87,11 +87,19 @@ public class Ex07MyFriendInfoBook {
 
 	public static void main(String[] args) {
 		Scanner scan = new Scanner(System.in);
-		FriendInfoHandler handler = new FriendInfoHandler();
+		FriendInfoHandler handler = new FriendInfoHandler(100);
 
 		while (true) {
 			menuShow();
-			int choice = scan.nextInt();
+			int choice;
+			try {
+				choice = scan.nextInt();
+			} catch (InputMismatchException e) {
+				System.out.println("숫자만 입력가능합니다.");
+				scan.nextLine();
+				continue;
+			} 
+			
 			switch (choice) {
 			case 1:
 			case 2:
@@ -119,15 +127,12 @@ public class Ex07MyFriendInfoBook {
 }
 
 class FriendInfoHandler {
-//	private Friend[] myFriends;
-//	private int numOfFreinds;
+	private Friend[] myFriends;
+	private int numOfFreinds;
 
-	private ArrayList<Friend> lists;
-
-	public FriendInfoHandler() {
-//		myFriends = new Friend[num];
-//		numOfFreinds = 0;
-		lists = new ArrayList<Friend>();
+	public FriendInfoHandler(int num) {
+		myFriends = new Friend[num];
+		numOfFreinds = 0;
 	}
 
 	public void addFriend(int choice) {
@@ -146,26 +151,25 @@ class FriendInfoHandler {
 			System.out.println("별명:");
 			iNickname = scan.nextLine();
 			HighFriend high = new HighFriend(iName, iPhone, iAddr, iNickname);
-			lists.add(high);
+			myFriends[numOfFreinds++] = high;
 		} else if (choice == 2) {
 			System.out.println("전공:");
 			iMajor = scan.nextLine();
-			UnivFriend univ = new UnivFriend(iName, iPhone, iAddr, iMajor);
-			lists.add(univ);
+			myFriends[numOfFreinds++] = new UnivFriend(iName, iPhone, iAddr, iMajor);
 		}
 		System.out.println("친구정보 입력이 완료되었습니다. ");
 	}
 
 	public void showAllData() {
-		for (Friend fir : lists) {
-			fir.showAllData();
+		for (int i = 0; i < numOfFreinds; i++) {
+			myFriends[i].showAllData();
 		}
 		System.out.println("==전체정보가 출력되었습니다==");
 	}
 
 	public void showSimpleData() {
-		for (Friend fir : lists) {
-			fir.showBasicInfo();
+		for (int i = 0; i < numOfFreinds; i++) {
+			myFriends[i].showBasicInfo();
 		}
 		System.out.println("==간략정보가 출력되었습니다. ==");
 	}
@@ -176,14 +180,13 @@ class FriendInfoHandler {
 		System.out.println("검색할 이름을 입력하세요");
 		String searchName = scan.nextLine();
 
-		for (int i = 0; i < lists.size(); i++) {
-			if (searchName.compareTo(lists.get(i).name) == 0) {
-				lists.get(i).showAllData();
+		for (int i = 0; i < numOfFreinds; i++) {
+			if (searchName.compareTo(myFriends[i].name) == 0) {
+				myFriends[i].showAllData();
 				System.out.println("**귀하가 요청하는 정보를 찾았습니다.");
 				isFind = true;
 			}
 		}
-
 		if (isFind == false)
 			System.out.println("**찾는정보가 없습니다.**");
 	}
@@ -194,20 +197,23 @@ class FriendInfoHandler {
 		String deleteName = scan.nextLine();
 		int deleteIndex = -1;
 
-		Iterator<Friend> itr = lists.iterator();
-		while (itr.hasNext()) {
-			if (deleteName.compareTo(itr.next().name) == 0) {
-				// fir = null;
-				lists.remove(itr.next());
-				deleteIndex = 1;
+		for (int i = 0; i < numOfFreinds; i++) {
+			if (deleteName.compareTo(myFriends[i].name) == 0) {
+				myFriends[i] = null;
+				deleteIndex = i;
+				numOfFreinds--;
 				break;
 			}
-		}
 
+		}
 		if (deleteIndex == -1) {
 			System.out.println("==삭제된 데이터가 없습니다. ==");
+		} else {
+			for (int i = deleteIndex; i < numOfFreinds; i++) {
+				myFriends[i] = myFriends[i + 1];
+			}
+			System.out.println("==데이터(" + deleteIndex + "번)가 삭제되었습니다.");
 		}
-		System.out.println("==데이터가 삭제되었습니다.");
 
 	}
 

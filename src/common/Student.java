@@ -1,16 +1,17 @@
 package common;
 
-public class Student extends Person{
+public class Student extends Person {
 	private String stNumber;
 
 	public Student(String name, int age, String stNumber) {
 		super(name, age);
-		this.stNumber=stNumber;
+		this.stNumber = stNumber;
 	}
+
 	@Override
 	public String toString() {
 		// TODO Auto-generated method stub
-		return super.toString()+",학번:"+stNumber;
+		return super.toString() + ",학번:" + stNumber;
 	}
-	
+
 }
