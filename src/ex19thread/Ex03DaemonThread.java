@@ -1,18 +1,18 @@
 package ex19thread;
 
-class NormalClass {
-	String title;
-
-	public NormalClass(String title) {
-		this.title = title;
-	}
-
-	void classMethod() {
-		for (int i = 1; i <= 10; i++) {
-			System.out.printf("%s]i=%d%n", title, i);
-		}
-	}
-}
+//class NormalClass {
+//	String title;
+//
+//	public NormalClass(String title) {
+//		this.title = title;
+//	}
+//
+//	void classMethod() {
+//		for (int i = 1; i <= 10; i++) {
+//			System.out.printf("%s]i=%d%n", title, i);
+//		}
+//	}
+//}
 
 class NormalThread extends Thread {
 	public NormalThread() {
@@ -24,7 +24,7 @@ class NormalThread extends Thread {
 
 	void threadMethod() throws InterruptedException {
 		for (int i = 1; i <= 10; i++) {
-			System.out.printf("%s]i=%d%n", getName(), i);
+			System.out.printf("[%s]i=%d%n", getName(), i);
 			sleep(2000);
 		}
 	}
@@ -42,12 +42,12 @@ class DaemonThread extends Thread {
 	@Override
 	public void run() {
 		while (true) {
-			System.out.printf("쓰레드명:%s jass가 흘러요~%n", getName());
+			System.out.printf("대몬-쓰레드명:%s jass가 흘러요~%n", getName());
 			try {
 				sleep(3000);
-				System.out.println("3초마다 자동저장");
+				System.out.println("대몬-3초마다 자동저장");
 			} catch (InterruptedException e) {
-				System.out.println("자동저장 오류발생");
+				System.out.println("대몬-자동저장 오류발생");
 			}
 		}
 	}
@@ -56,11 +56,11 @@ class DaemonThread extends Thread {
 public class Ex03DaemonThread {
 
 	public static void main(String[] args) {
-		NormalClass nt1 = new NormalClass("첫번째 클래스");
-		nt1.classMethod();
-		new NormalClass("두번째 클래스").classMethod();
+//		NormalClass nt1 = new NormalClass("첫번째 클래스");
+//		nt1.classMethod();
+//		new NormalClass("두번째 클래스").classMethod();
 
-		NormalThread yt1 = new NormalThread("1st 쓰레드");
+		NormalThread yt1 = new NormalThread("첫번째 쓰레드");
 		yt1.start();
 
 		NormalThread yt2 = new NormalThread();
@@ -69,7 +69,7 @@ public class Ex03DaemonThread {
 
 		DaemonThread dt = new DaemonThread();
 		dt.setName("데몬쓰레드");
-		dt.setDaemon(true);
+		dt.setDaemon(false);
 		dt.start();
 
 		System.out.println("현재 활성화된 상태의 쓰레드수 " + Thread.activeCount());

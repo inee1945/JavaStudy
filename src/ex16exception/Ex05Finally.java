@@ -18,9 +18,6 @@ public class Ex05Finally {
 			return ;
 		}catch(InputMismatchException e){
 			System.out.println("숫자만 입력하세요");
-		}finally {
-			System.out.println("항상실행되는 finally절입니다");
-			System.exit(0);
 		}
 	}
 	public static void main(String[] args)  {
